@@ -2,7 +2,7 @@ from sklearn.pipeline import Pipeline
 from sklearn.compose import ColumnTransformer
 from sklearn.impute import SimpleImputer
 from sklearn.preprocessing import OneHotEncoder, StandardScaler
-from sklearn.ensemble import RandomForestRegressor
+from sklearn.ensemble import HistGradientBoostingRegressor
 
 def build_pipeline(numeric_features, categorical_features):
     # Numeric pipeline: median impute → standard scale
@@ -11,7 +11,7 @@ def build_pipeline(numeric_features, categorical_features):
         ("scaler", StandardScaler()),
     ])
 
-    # Categorical pipeline: constant impute → one-hot encode
+    # Categorical pipeline: constant impute → one-hot encode (dense output)
     categorical_transformer = Pipeline([
         ("imputer", SimpleImputer(strategy="constant", fill_value="missing")),
         ("onehot", OneHotEncoder(handle_unknown="ignore", sparse_output=False)),
@@ -25,7 +25,7 @@ def build_pipeline(numeric_features, categorical_features):
     # Full pipeline: preprocessor → random forest
     pipeline = Pipeline([
         ("preprocessor", preprocessor),
-        ("model", RandomForestRegressor(n_estimators=100, random_state=42)),
+        ("model", HistGradientBoostingRegressor(max_iter=200, random_state=42)),
     ])
 
     return pipeline
