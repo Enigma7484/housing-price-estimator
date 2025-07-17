@@ -1,10 +1,12 @@
 from sklearn.pipeline import Pipeline
 from sklearn.compose import ColumnTransformer
 from sklearn.impute import SimpleImputer
+from torch.optim.lr_scheduler import StepLR
 from sklearn.preprocessing import OneHotEncoder, StandardScaler
+from pytorch_tabnet.tab_model import TabNetRegressor
 from sklearn.ensemble import HistGradientBoostingRegressor
 
-def build_pipeline(numeric_features, categorical_features):
+def build_tabnet_pipeline(numeric_features, categorical_features):
     # Numeric pipeline: median impute → standard scale
     numeric_transformer = Pipeline([
         ("imputer", SimpleImputer(strategy="median")),
@@ -22,10 +24,43 @@ def build_pipeline(numeric_features, categorical_features):
         ("cat", categorical_transformer, categorical_features),
     ])
 
-    # Full pipeline: preprocessor → random forest
     pipeline = Pipeline([
         ("preprocessor", preprocessor),
-        ("model", HistGradientBoostingRegressor(max_iter=200, random_state=42)),
+        ("model", TabNetRegressor(
+            optimizer_params={"lr":1e-3},
+            scheduler_params={"step_size":50, "gamma":0.9},
+            scheduler_fn=StepLR,      # <-- pass the callable, not a string
+            mask_type="entmax",
+            n_d=16, n_a=16, n_steps=5,
+            lambda_sparse=0.0001,
+            seed=42,
+            verbose=0
+        )),
     ])
 
     return pipeline
+
+def build_pipeline(num_cols, cat_cols):
+    num_pipe = Pipeline([
+        ("imp",   SimpleImputer(strategy="median")),
+        ("scale", StandardScaler())
+    ])
+    cat_pipe = Pipeline([
+        ("imp",  SimpleImputer(strategy="constant", fill_value="missing")),
+        ("ohe",  OneHotEncoder(handle_unknown="ignore", sparse_output=False))
+    ])
+    pre = ColumnTransformer([
+        ("num", num_pipe, num_cols),
+        ("cat", cat_pipe, cat_cols)
+    ])
+
+    head = HistGradientBoostingRegressor(
+        learning_rate=0.05,
+        max_depth=None,
+        max_iter=300,
+        early_stopping=True,
+        validation_fraction=0.1,
+        random_state=42
+    )
+
+    return Pipeline([("preprocessor", pre), ("model", head)])

@@ -3,7 +3,7 @@ import seaborn as sns
 import matplotlib.pyplot as plt
 
 # 1. Load data
-df = pd.read_csv("kc_house_data.csv")
+df = pd.read_csv("data/train.csv")
 
 # 2. Quick look
 print("Shape:", df.shape)

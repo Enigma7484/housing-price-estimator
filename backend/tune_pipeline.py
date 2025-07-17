@@ -29,18 +29,20 @@ if __name__ == "__main__":
     # 4) Build base pipeline
     base_pipe = build_pipeline(numeric_feats, categorical_feats)
 
-    # 5) Define hyperparameter distributions
+    # 5) Define hyperparameter distributions for HistGradientBoostingRegressor
     param_dist = {
-        # number of trees
-        "model__n_estimators": [100, 200, 300, 500],
+        # number of boosting iterations (analogous to n_estimators)
+        "model__max_iter": [100, 200, 300, 500],
         # maximum tree depth
         "model__max_depth": [None, 10, 20, 30],
-        # min samples to split an internal node
-        "model__min_samples_split": [2, 5, 10],
-        # min samples per leaf
+        # minimum samples per leaf
         "model__min_samples_leaf": [1, 2, 4],
-        # whether to bootstrap samples
-        "model__bootstrap": [True, False],
+        # learning rate for shrinking the contribution of each tree
+        "model__learning_rate": [0.01, 0.1, 0.2],
+        # maximum number of leaves per tree
+        "model__max_leaf_nodes": [31, 50, 100],
+        # L2 regularization strength
+        "model__l2_regularization": [0.0, 0.1, 1.0],
     }
 
     # 6) Set up RandomizedSearchCV
