@@ -1,4 +1,3 @@
-# backend/text_transformer.py
 from transformers import AutoTokenizer, AutoModel
 import torch
 import pandas as pd

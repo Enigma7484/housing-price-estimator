@@ -18,9 +18,8 @@ if __name__ == "__main__":
     )
 
     # 3) Build & train
-    numeric_feats = X.select_dtypes(include=["int64","float64"]).columns.tolist()
-    categorical_feats = ["zipcode","view","condition","waterfront",
-                         "grade","sale_year","sale_month"]
+    numeric_feats = X.select_dtypes(include=["number"]).columns.tolist()
+    categorical_feats = X.select_dtypes(include=["object"]).columns.tolist()
     pipe = build_pipeline(numeric_feats, categorical_feats)
     pipe.fit(X_train, y_train_log)
 

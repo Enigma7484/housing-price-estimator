@@ -5,6 +5,7 @@ from torch.optim.lr_scheduler import StepLR
 from sklearn.preprocessing import OneHotEncoder, StandardScaler
 from pytorch_tabnet.tab_model import TabNetRegressor
 from sklearn.ensemble import HistGradientBoostingRegressor
+from sklearn.feature_selection import VarianceThreshold
 
 def build_tabnet_pipeline(numeric_features, categorical_features):
     # Numeric pipeline: median impute → standard scale
@@ -63,4 +64,8 @@ def build_pipeline(num_cols, cat_cols):
         random_state=42
     )
 
-    return Pipeline([("preprocessor", pre), ("model", head)])
+    return Pipeline([
+        ("preprocessor", pre),
+        ("var_thresh",   VarianceThreshold(threshold=0.0)),  # drop const cols
+        ("model",        head),
+    ])

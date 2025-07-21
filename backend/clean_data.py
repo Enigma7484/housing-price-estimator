@@ -1,5 +1,3 @@
-# backend/clean_data.py
-
 import pandas as pd
 from pathlib import Path
 from image_transformer import add_image_features

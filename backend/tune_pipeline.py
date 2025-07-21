@@ -1,5 +1,3 @@
-# backend/tune_pipeline.py
-
 import numpy as np
 import pandas as pd
 from sklearn.model_selection import train_test_split, RandomizedSearchCV
@@ -20,11 +18,8 @@ if __name__ == "__main__":
     )
 
     # 3) Column groups (same as before)
-    numeric_feats = X.select_dtypes(include=["int64", "float64"]).columns.tolist()
-    categorical_feats = [
-        "zipcode","view","condition","waterfront",
-        "grade","sale_year","sale_month"
-    ]
+    numeric_feats = X.select_dtypes(include=["number"]).columns.tolist()
+    categorical_feats = X.select_dtypes(include=["object"]).columns.tolist()
 
     # 4) Build base pipeline
     base_pipe = build_pipeline(numeric_feats, categorical_feats)
