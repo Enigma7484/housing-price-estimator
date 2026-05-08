@@ -1,0 +1,28 @@
+{
+  "candidates": [
+    {
+      "model_name": "Linear Regression Baseline",
+      "mae": 127567.93,
+      "rmse": 212538.24,
+      "r2": 0.7012
+    },
+    {
+      "model_name": "RandomForestRegressor",
+      "mae": 72639.17,
+      "rmse": 146397.17,
+      "r2": 0.8582
+    },
+    {
+      "model_name": "GradientBoostingRegressor",
+      "mae": 73581.53,
+      "rmse": 143303.24,
+      "r2": 0.8642
+    }
+  ],
+  "best": {
+    "model_name": "GradientBoostingRegressor",
+    "mae": 73581.53,
+    "rmse": 143303.24,
+    "r2": 0.8642
+  }
+}

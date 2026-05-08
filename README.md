@@ -148,8 +148,23 @@ The backend runs on `http://localhost:8000` and the frontend runs on `http://loc
 
 Recommended hosted setup:
 
-- Frontend: Vercel project with root directory `frontend`
-- Backend: Render web service from `render.yaml`
+- Primary: one Vercel project from the repository root
+- Fallback: Vercel frontend plus Render backend from `render.yaml`
+
+For the Vercel-only setup, import the GitHub repo and keep the root directory as the repository root. The root `vercel.json` builds the Vite frontend and exposes the FastAPI backend through Vercel Python Functions under `/api`.
+
+Vercel settings:
+
+```text
+Root Directory: ./
+Build Command: cd frontend && npm run build
+Install Command: cd frontend && npm install
+Output Directory: frontend/dist
+```
+
+No production `VITE_API_BASE_URL` is required for the Vercel-only setup. The frontend calls same-origin `/api`.
+
+Render fallback:
 
 Render build command:
 

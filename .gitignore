@@ -5,9 +5,8 @@ __pycache__/
 .venv/
 venv/
 
-# Model/runtime artifacts
-backend/app/models/*.joblib
-backend/app/models/*.json
+# Local experiment artifacts
+backend/app/models/experiments/
 
 # Node
 node_modules/
