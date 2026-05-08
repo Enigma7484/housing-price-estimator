@@ -42,6 +42,14 @@ app.include_router(estimators.router, prefix=settings.api_prefix, tags=["Estimat
 app.include_router(housing.router, prefix=f"{settings.api_prefix}/housing", tags=["Housing"])
 app.include_router(mobile.router, prefix=f"{settings.api_prefix}/mobile", tags=["Mobile"])
 
+# Vercel Services can mount this FastAPI app behind a route prefix and forward
+# stripped paths to the function. Keep unprefixed aliases so both
+# /api/housing/predict and /housing/predict work across local and hosted modes.
+app.include_router(health.router, tags=["Health"])
+app.include_router(estimators.router, tags=["Estimators"])
+app.include_router(housing.router, prefix="/housing", tags=["Housing"])
+app.include_router(mobile.router, prefix="/mobile", tags=["Mobile"])
+
 
 @app.get("/")
 def root():
