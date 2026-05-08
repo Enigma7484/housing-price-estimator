@@ -4,6 +4,8 @@ __pycache__/
 .pytest_cache/
 .venv/
 venv/
+backend/__pycache__/
+backend/data/images/
 
 # Local experiment artifacts
 backend/app/models/experiments/
