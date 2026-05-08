@@ -4,6 +4,7 @@ __pycache__/
 .pytest_cache/
 .venv/
 venv/
+.deploy-venv/
 backend/__pycache__/
 backend/data/images/
 

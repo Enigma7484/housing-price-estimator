@@ -2,8 +2,8 @@
   "candidates": [
     {
       "model_name": "Linear Regression Baseline",
-      "mae": 127567.93,
-      "rmse": 212538.24,
+      "mae": 127493.34,
+      "rmse": 212539.52,
       "r2": 0.7012
     },
     {
@@ -14,15 +14,15 @@
     },
     {
       "model_name": "GradientBoostingRegressor",
-      "mae": 73581.53,
-      "rmse": 143303.24,
-      "r2": 0.8642
+      "mae": 73626.39,
+      "rmse": 143545.29,
+      "r2": 0.8637
     }
   ],
   "best": {
     "model_name": "GradientBoostingRegressor",
-    "mae": 73581.53,
-    "rmse": 143303.24,
-    "r2": 0.8642
+    "mae": 73626.39,
+    "rmse": 143545.29,
+    "r2": 0.8637
   }
 }

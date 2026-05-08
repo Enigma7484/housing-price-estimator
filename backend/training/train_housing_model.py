@@ -8,7 +8,15 @@ import joblib
 import pandas as pd
 from sklearn.ensemble import GradientBoostingRegressor, RandomForestRegressor
 from sklearn.linear_model import LinearRegression
-from sklearn.metrics import mean_absolute_error, mean_squared_error, r2_score
+from sklearn.metrics import mean_absolute_error, r2_score
+
+try:
+    from sklearn.metrics import root_mean_squared_error
+except ImportError:
+    from sklearn.metrics import mean_squared_error
+
+    def root_mean_squared_error(y_true, y_pred):
+        return mean_squared_error(y_true, y_pred, squared=False)
 from sklearn.model_selection import train_test_split
 from sklearn.pipeline import Pipeline
 from sklearn.preprocessing import StandardScaler
@@ -37,7 +45,7 @@ def evaluate_model(name: str, model: Pipeline, x_test: pd.DataFrame, y_test: pd.
     return {
         "model_name": name,
         "mae": round(float(mean_absolute_error(y_test, predictions)), 2),
-        "rmse": round(float(mean_squared_error(y_test, predictions, squared=False)), 2),
+        "rmse": round(float(root_mean_squared_error(y_test, predictions)), 2),
         "r2": round(float(r2_score(y_test, predictions)), 4),
     }
 
