@@ -5,7 +5,7 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
 from app.config import get_settings
-from app.routes import estimators, health, housing, mobile
+from app.routes import car, estimators, health, housing, mobile
 from app.services.estimator_registry import estimator_registry
 
 logging.basicConfig(level=logging.INFO, format="%(asctime)s %(levelname)s %(name)s - %(message)s")
@@ -41,6 +41,7 @@ app.include_router(health.router, prefix=settings.api_prefix, tags=["Health"])
 app.include_router(estimators.router, prefix=settings.api_prefix, tags=["Estimators"])
 app.include_router(housing.router, prefix=f"{settings.api_prefix}/housing", tags=["Housing"])
 app.include_router(mobile.router, prefix=f"{settings.api_prefix}/mobile", tags=["Mobile"])
+app.include_router(car.router, prefix=f"{settings.api_prefix}/car", tags=["Car"])
 
 # Vercel Services can mount this FastAPI app behind a route prefix and forward
 # stripped paths to the function. Keep unprefixed aliases so both
@@ -49,6 +50,7 @@ app.include_router(health.router, tags=["Health"])
 app.include_router(estimators.router, tags=["Estimators"])
 app.include_router(housing.router, prefix="/housing", tags=["Housing"])
 app.include_router(mobile.router, prefix="/mobile", tags=["Mobile"])
+app.include_router(car.router, prefix="/car", tags=["Car"])
 
 
 @app.get("/")

@@ -3,6 +3,8 @@ import axios from "axios";
 import type {
   HousingPayload,
   HousingPrediction,
+  CarPayload,
+  CarPrediction,
   EstimatorCatalogResponse,
   MobilePayload,
   MobilePrediction,
@@ -36,6 +38,16 @@ export async function predictMobile(payload: MobilePayload): Promise<MobilePredi
 
 export async function getMobileMetadata(): Promise<ModelMetadata> {
   const response = await client.get<ModelMetadata>("/api/mobile/metadata");
+  return response.data;
+}
+
+export async function predictCar(payload: CarPayload): Promise<CarPrediction> {
+  const response = await client.post<CarPrediction>("/api/car/predict", payload);
+  return response.data;
+}
+
+export async function getCarMetadata(): Promise<ModelMetadata> {
+  const response = await client.get<ModelMetadata>("/api/car/metadata");
   return response.data;
 }
 

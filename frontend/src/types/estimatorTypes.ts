@@ -69,6 +69,37 @@ export type MobilePrediction = {
   input_summary: Record<string, string | number | boolean>;
 };
 
+export type CarPayload = {
+  make: string;
+  model: string;
+  body_type: "sedan" | "suv" | "truck" | "hatchback" | "coupe" | "wagon";
+  fuel_type: "gasoline" | "diesel" | "hybrid" | "electric";
+  transmission: "automatic" | "manual";
+  year: number;
+  mileage: number;
+  engine_size_l: number;
+  horsepower: number;
+  owners: number;
+  accident_history: boolean;
+  condition_score: number;
+};
+
+export type CarPrediction = {
+  predicted_price: number;
+  formatted_price: string;
+  model_name: string;
+  price_range: {
+    low: number;
+    high: number;
+    formatted_low: string;
+    formatted_high: string;
+  };
+  confidence: string;
+  value_badge: string;
+  explanation: string[];
+  input_summary: Record<string, string | number | boolean>;
+};
+
 export type ModelMetadata = {
   estimator: string;
   model_name: string;

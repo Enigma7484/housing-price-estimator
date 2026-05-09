@@ -3,6 +3,7 @@ from __future__ import annotations
 from dataclasses import dataclass
 from typing import Any, Callable
 
+from app.services.car_service import car_service
 from app.services.housing_service import housing_service
 from app.services.mobile_service import mobile_service
 
@@ -46,19 +47,20 @@ LIVE_ESTIMATORS = [
         description="Classify mobile devices into market tiers from hardware and connectivity specs.",
         metadata_provider=mobile_service.metadata,
     ),
-]
-
-PLANNED_ESTIMATORS = [
     EstimatorDefinition(
         key="car",
         name="Car Price Estimator",
         category="Automotive",
         problem_type="Regression",
-        route=None,
-        frontend_path=None,
-        phase="Roadmap",
+        route="/api/car/predict",
+        frontend_path="/estimators/car",
+        phase="Phase 4",
         description="Predict vehicle resale value using mileage, make, year, condition, and trim.",
+        metadata_provider=car_service.metadata,
     ),
+]
+
+PLANNED_ESTIMATORS = [
     EstimatorDefinition(
         key="laptop",
         name="Laptop Price Estimator",
@@ -122,11 +124,16 @@ class EstimatorRegistry:
             mobile_service.load()
         except FileNotFoundError:
             pass
+        try:
+            car_service.load()
+        except FileNotFoundError:
+            pass
 
     def health(self) -> dict[str, str]:
         return {
             "housing": "ready" if housing_service.is_loaded else "model_not_loaded",
             "mobile": "ready" if mobile_service.is_loaded else "model_not_loaded",
+            "car": "ready" if car_service.is_loaded else "model_not_loaded",
         }
 
     def catalog(self) -> list[dict[str, Any]]:

@@ -30,3 +30,5 @@ uvicorn app.main:app --reload --port 8000
 - `POST /api/housing/predict`
 - `GET /api/mobile/metadata`
 - `POST /api/mobile/predict`
+- `GET /api/car/metadata`
+- `POST /api/car/predict`

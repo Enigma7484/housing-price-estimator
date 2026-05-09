@@ -8,6 +8,7 @@ This is structured as an extensible estimator platform, not a notebook. New esti
 
 - Housing price prediction from real property inputs
 - Mobile price-range classification from device specifications
+- Car resale value prediction from vehicle profile inputs
 - Multiple model training and evaluation with MAE, RMSE, and R2
 - Best-model artifact saved locally with metadata
 - FastAPI inference endpoint with typed request and response schemas
@@ -51,6 +52,7 @@ source venv/bin/activate
 pip install -r requirements.txt
 python training/train_housing_model.py
 python training/train_mobile_model.py
+python training/train_car_model.py
 uvicorn app.main:app --reload --port 8000
 ```
 
@@ -63,6 +65,7 @@ venv\Scripts\Activate.ps1
 pip install -r requirements.txt
 python training/train_housing_model.py
 python training/train_mobile_model.py
+python training/train_car_model.py
 uvicorn app.main:app --reload --port 8000
 ```
 
@@ -88,6 +91,8 @@ VITE_API_BASE_URL=http://localhost:8000
 - `POST /api/housing/predict`
 - `GET /api/mobile/metadata`
 - `POST /api/mobile/predict`
+- `GET /api/car/metadata`
+- `POST /api/car/predict`
 
 Example housing request:
 
@@ -129,12 +134,21 @@ cd backend
 python training/train_mobile_model.py
 ```
 
+The car model trains from `backend/data/car/train.csv` when present. If that file is missing, the trainer creates a deterministic bootstrap resale dataset for local and deployed demos.
+
+```bash
+cd backend
+python training/train_car_model.py
+```
+
 The script cleans data, splits train/test, compares model candidates, selects the best R2 score, and saves:
 
 - `backend/app/models/housing_model.joblib`
 - `backend/app/models/housing_metrics.json`
 - `backend/app/models/mobile_model.joblib`
 - `backend/app/models/mobile_metrics.json`
+- `backend/app/models/car_model.joblib`
+- `backend/app/models/car_metrics.json`
 
 ## Docker
 
@@ -196,7 +210,7 @@ Add screenshots here after running the local demo:
 
 ## Roadmap
 
-- Car, laptop, salary, rent, insurance, and used-phone estimators
+- Laptop, salary, rent, insurance, and used-phone estimators
 - SHAP or feature-importance explainability
 - Model registry and retraining metadata
 - Authentication for business-facing demos

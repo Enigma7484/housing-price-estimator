@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { Navigate, Route, Routes } from "react-router-dom";
 
 import Navbar from "./components/Navbar";
+import CarEstimator from "./pages/CarEstimator";
 import Dashboard from "./pages/Dashboard";
 import Home from "./pages/Home";
 import HousingEstimator from "./pages/HousingEstimator";
@@ -35,6 +36,7 @@ export default function App() {
           <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/estimators/housing" element={<HousingEstimator />} />
           <Route path="/estimators/mobile" element={<MobileEstimator />} />
+          <Route path="/estimators/car" element={<CarEstimator />} />
           <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>
       </main>

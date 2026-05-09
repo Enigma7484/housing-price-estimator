@@ -1,10 +1,11 @@
-import { BarChart3, Building2, Home, LayoutDashboard, Moon, Smartphone, Sun } from "lucide-react";
+import { BarChart3, Building2, Car, Home, LayoutDashboard, Moon, Smartphone, Sun } from "lucide-react";
 import { NavLink } from "react-router-dom";
 
 const navItems = [
   { label: "Home", href: "/", icon: Home },
   { label: "Housing", href: "/estimators/housing", icon: Building2 },
   { label: "Mobile", href: "/estimators/mobile", icon: Smartphone },
+  { label: "Car", href: "/estimators/car", icon: Car },
   { label: "Dashboard", href: "/dashboard", icon: LayoutDashboard },
 ];
 

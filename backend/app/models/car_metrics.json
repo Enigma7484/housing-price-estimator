@@ -1,0 +1,22 @@
+{
+  "candidates": [
+    {
+      "model_name": "RandomForestRegressor",
+      "mae": 3322.29,
+      "rmse": 4397.43,
+      "r2": 0.9722
+    },
+    {
+      "model_name": "GradientBoostingRegressor",
+      "mae": 2890.67,
+      "rmse": 3679.09,
+      "r2": 0.9805
+    }
+  ],
+  "best": {
+    "model_name": "GradientBoostingRegressor",
+    "mae": 2890.67,
+    "rmse": 3679.09,
+    "r2": 0.9805
+  }
+}
