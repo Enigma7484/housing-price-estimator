@@ -1,5 +1,6 @@
-import { BarChart3, Building2, Car, Home, LayoutDashboard, Moon, Smartphone, Sun } from "lucide-react";
+import { BarChart3, Building2, Car, Home, LayoutDashboard, Moon, Smartphone, Sun, Terminal } from "lucide-react";
 import { NavLink } from "react-router-dom";
+import type { AppTheme } from "../App";
 
 const navItems = [
   { label: "Home", href: "/", icon: Home },
@@ -10,12 +11,13 @@ const navItems = [
 ];
 
 type NavbarProps = {
-  theme: "light" | "dark";
+  theme: AppTheme;
   onToggleTheme: () => void;
 };
 
 export default function Navbar({ theme, onToggleTheme }: NavbarProps) {
-  const ThemeIcon = theme === "dark" ? Sun : Moon;
+  const ThemeIcon = theme === "terminal" ? Sun : theme === "dark" ? Terminal : Moon;
+  const nextTheme = theme === "terminal" ? "light" : theme === "light" ? "dark" : "terminal";
 
   return (
     <header className="border-b border-line bg-white">
@@ -50,8 +52,8 @@ export default function Navbar({ theme, onToggleTheme }: NavbarProps) {
           <button
             type="button"
             onClick={onToggleTheme}
-            aria-label={theme === "dark" ? "Switch to light mode" : "Switch to dark mode"}
-            title={theme === "dark" ? "Switch to light mode" : "Switch to dark mode"}
+            aria-label={`Switch to ${nextTheme} mode`}
+            title={`Switch to ${nextTheme} mode`}
             className="inline-flex h-10 w-10 items-center justify-center rounded-md border border-line bg-white text-graphite transition hover:border-signal hover:text-signal"
           >
             <ThemeIcon className="h-4 w-4" />

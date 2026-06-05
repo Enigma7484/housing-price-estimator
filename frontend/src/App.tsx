@@ -8,23 +8,36 @@ import Home from "./pages/Home";
 import HousingEstimator from "./pages/HousingEstimator";
 import MobileEstimator from "./pages/MobileEstimator";
 
+export type AppTheme = "terminal" | "dark" | "light";
+
 export default function App() {
-  const [theme, setTheme] = useState<"light" | "dark">(() => {
-    const savedTheme = localStorage.getItem("theme");
-    if (savedTheme === "light" || savedTheme === "dark") {
+  const [theme, setTheme] = useState<AppTheme>(() => {
+    const savedTheme = localStorage.getItem("estimator.theme");
+    if (savedTheme === "terminal" || savedTheme === "light" || savedTheme === "dark") {
       return savedTheme;
     }
-    return window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+    return "terminal";
   });
 
   useEffect(() => {
-    document.documentElement.classList.toggle("dark", theme === "dark");
-    document.documentElement.style.colorScheme = theme;
-    localStorage.setItem("theme", theme);
+    document.documentElement.classList.toggle("dark", theme === "dark" || theme === "terminal");
+    document.documentElement.dataset.theme = theme;
+    document.documentElement.style.colorScheme = theme === "light" ? "light" : "dark";
+    document.documentElement.style.setProperty("--theme-panel-alpha", "0.66");
+    document.documentElement.style.setProperty("--theme-blur", "18px");
+    localStorage.setItem("estimator.theme", theme);
   }, [theme]);
 
   function toggleTheme() {
-    setTheme((currentTheme) => (currentTheme === "dark" ? "light" : "dark"));
+    setTheme((currentTheme) => {
+      if (currentTheme === "terminal") {
+        return "light";
+      }
+      if (currentTheme === "light") {
+        return "dark";
+      }
+      return "terminal";
+    });
   }
 
   return (

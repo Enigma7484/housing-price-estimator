@@ -5,9 +5,33 @@
 :root {
   color-scheme: light;
   font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --bg: #f5f7fb;
+  --panel: #ffffff;
+  --panel-2: #f5f7fb;
+  --border: #d9dee8;
+  --text: #15171c;
+  --muted: #64748b;
+  --green: #0f766e;
+  --blue: #2563eb;
+  --blue-hover: #1d4ed8;
+  --input: #ffffff;
 }
 
 :root.dark {
+  color-scheme: dark;
+}
+
+:root[data-theme="terminal"] {
+  --bg: #020604;
+  --panel: rgba(3, 18, 10, var(--theme-panel-alpha, 0.66));
+  --panel-2: rgba(7, 32, 18, var(--theme-panel-alpha, 0.66));
+  --border: rgba(34, 197, 94, 0.22);
+  --text: #e8ffe8;
+  --muted: #91b59c;
+  --green: #22c55e;
+  --blue: #16a34a;
+  --blue-hover: #15803d;
+  --input: rgba(0, 8, 4, 0.72);
   color-scheme: dark;
 }
 
@@ -23,6 +47,28 @@ body {
 
 .dark body {
   background: #0f141c;
+}
+
+[data-theme="terminal"] body {
+  background:
+    radial-gradient(circle at 20% 0%, rgba(34, 197, 94, 0.14), transparent 34%),
+    radial-gradient(circle at 88% 18%, rgba(20, 184, 166, 0.1), transparent 34%),
+    linear-gradient(180deg, #020604 0%, #04120a 48%, #010302 100%);
+  color: var(--text);
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", Inter, sans-serif;
+}
+
+[data-theme="terminal"] body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: -1;
+  background:
+    linear-gradient(rgba(255, 255, 255, 0.025) 50%, rgba(0, 0, 0, 0.08) 50%),
+    linear-gradient(90deg, rgba(34, 197, 94, 0.05), rgba(0, 0, 0, 0), rgba(56, 189, 248, 0.025));
+  background-size: 100% 4px, 6px 100%;
+  opacity: 0.55;
 }
 
 button,
@@ -85,5 +131,140 @@ textarea {
 
   .dark .hover\:bg-mist:hover {
     background-color: #222a35;
+  }
+
+  [data-theme="terminal"] .bg-mist {
+    background-color: transparent;
+  }
+
+  [data-theme="terminal"] .bg-white,
+  [data-theme="terminal"] .bg-slate-50,
+  [data-theme="terminal"] .bg-slate-100 {
+    background: linear-gradient(180deg, rgba(2, 18, 9, var(--theme-panel-alpha, 0.66)), rgba(0, 7, 4, var(--theme-panel-alpha, 0.66)));
+    backdrop-filter: blur(var(--theme-blur, 18px)) saturate(1.12);
+    -webkit-backdrop-filter: blur(var(--theme-blur, 18px)) saturate(1.12);
+  }
+
+  [data-theme="terminal"] header.bg-white {
+    position: sticky;
+    top: 0;
+    z-index: 20;
+    background: rgba(1, 9, 5, var(--theme-panel-alpha, 0.66));
+    border-bottom-color: rgba(255, 255, 255, 0.08);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+  }
+
+  [data-theme="terminal"] .border-line,
+  [data-theme="terminal"] .border-slate-200 {
+    border-color: rgba(34, 197, 94, 0.18);
+  }
+
+  [data-theme="terminal"] .rounded-lg {
+    border-radius: 22px;
+  }
+
+  [data-theme="terminal"] .rounded-md {
+    border-radius: 10px;
+  }
+
+  [data-theme="terminal"] .shadow-panel {
+    box-shadow:
+      inset 0 1px 0 rgba(187, 247, 208, 0.06),
+      0 22px 70px rgba(0, 0, 0, 0.34),
+      0 0 40px rgba(34, 197, 94, 0.035);
+  }
+
+  [data-theme="terminal"] .text-ink,
+  [data-theme="terminal"] .text-graphite {
+    color: #e8ffe8;
+  }
+
+  [data-theme="terminal"] h1,
+  [data-theme="terminal"] h2,
+  [data-theme="terminal"] h3,
+  [data-theme="terminal"] .text-4xl,
+  [data-theme="terminal"] .text-3xl,
+  [data-theme="terminal"] .text-2xl {
+    color: #f0fff4;
+    text-shadow: 0 0 18px rgba(34, 197, 94, 0.24);
+  }
+
+  [data-theme="terminal"] .text-slate-300 {
+    color: #6f8f78;
+  }
+
+  [data-theme="terminal"] .text-slate-400,
+  [data-theme="terminal"] .text-slate-500,
+  [data-theme="terminal"] .text-slate-600 {
+    color: #91b59c;
+  }
+
+  [data-theme="terminal"] .text-signal,
+  [data-theme="terminal"] .text-amberline {
+    color: #86efac;
+  }
+
+  [data-theme="terminal"] .bg-signal,
+  [data-theme="terminal"] .bg-ink {
+    background: rgba(22, 163, 74, 0.82);
+    border: 1px solid rgba(134, 239, 172, 0.28);
+    box-shadow: 0 0 20px rgba(34, 197, 94, 0.14);
+  }
+
+  [data-theme="terminal"] .hover\:bg-graphite:hover,
+  [data-theme="terminal"] .hover\:bg-mist:hover {
+    background: rgba(21, 128, 61, 0.92);
+  }
+
+  [data-theme="terminal"] .bg-signal\/10 {
+    background: rgba(34, 197, 94, 0.12);
+    border: 1px solid rgba(34, 197, 94, 0.24);
+    color: #bbf7d0;
+  }
+
+  [data-theme="terminal"] input,
+  [data-theme="terminal"] textarea,
+  [data-theme="terminal"] select {
+    background: rgba(0, 10, 5, var(--theme-panel-alpha, 0.66));
+    color: #e8ffe8;
+    border-color: rgba(34, 197, 94, 0.2);
+    backdrop-filter: blur(var(--theme-blur, 18px));
+    -webkit-backdrop-filter: blur(var(--theme-blur, 18px));
+  }
+
+  [data-theme="terminal"] input:focus,
+  [data-theme="terminal"] textarea:focus,
+  [data-theme="terminal"] select:focus {
+    border-color: #60a5fa;
+    box-shadow: 0 0 0 3px rgba(96, 165, 250, 0.15);
+  }
+
+  [data-theme="terminal"] input::placeholder,
+  [data-theme="terminal"] textarea::placeholder {
+    color: #72937b;
+  }
+
+  [data-theme="terminal"] table thead {
+    background: rgba(34, 197, 94, 0.07);
+    color: #bbf7d0;
+  }
+
+  [data-theme="terminal"] tbody tr:hover {
+    background: rgba(34, 197, 94, 0.045);
+  }
+
+  [data-theme="terminal"] code {
+    background: rgba(0, 10, 5, var(--theme-panel-alpha, 0.66));
+    border: 1px solid rgba(34, 197, 94, 0.16);
+    color: #bbf7d0;
+  }
+
+  [data-theme="terminal"] a {
+    color: inherit;
+  }
+
+  [data-theme="terminal"] .accent-signal {
+    accent-color: #22c55e;
   }
 }
