@@ -1,6 +1,6 @@
-import { BarChart3, Building2, Car, Home, LayoutDashboard, Moon, Smartphone, Sun, Terminal } from "lucide-react";
+import { BarChart3, Building2, Car, Home, LayoutDashboard, Moon, Settings, Smartphone, Sun } from "lucide-react";
 import { NavLink } from "react-router-dom";
-import type { AppTheme } from "../App";
+import type { DisplayMode } from "../types/themeTypes";
 
 const navItems = [
   { label: "Home", href: "/", icon: Home },
@@ -8,16 +8,17 @@ const navItems = [
   { label: "Mobile", href: "/estimators/mobile", icon: Smartphone },
   { label: "Car", href: "/estimators/car", icon: Car },
   { label: "Dashboard", href: "/dashboard", icon: LayoutDashboard },
+  { label: "Settings", href: "/settings", icon: Settings },
 ];
 
 type NavbarProps = {
-  theme: AppTheme;
-  onToggleTheme: () => void;
+  mode: DisplayMode;
+  onToggleMode: () => void;
 };
 
-export default function Navbar({ theme, onToggleTheme }: NavbarProps) {
-  const ThemeIcon = theme === "terminal" ? Sun : theme === "dark" ? Terminal : Moon;
-  const nextTheme = theme === "terminal" ? "light" : theme === "light" ? "dark" : "terminal";
+export default function Navbar({ mode, onToggleMode }: NavbarProps) {
+  const ModeIcon = mode === "dark" ? Sun : Moon;
+  const nextMode = mode === "dark" ? "day" : "night";
 
   return (
     <header className="border-b border-line bg-white">
@@ -51,12 +52,12 @@ export default function Navbar({ theme, onToggleTheme }: NavbarProps) {
           })}
           <button
             type="button"
-            onClick={onToggleTheme}
-            aria-label={`Switch to ${nextTheme} mode`}
-            title={`Switch to ${nextTheme} mode`}
+            onClick={onToggleMode}
+            aria-label={`Switch to ${nextMode} mode`}
+            title={`Switch to ${nextMode} mode`}
             className="inline-flex h-10 w-10 items-center justify-center rounded-md border border-line bg-white text-graphite transition hover:border-signal hover:text-signal"
           >
-            <ThemeIcon className="h-4 w-4" />
+            <ModeIcon className="h-4 w-4" />
           </button>
         </div>
       </nav>
