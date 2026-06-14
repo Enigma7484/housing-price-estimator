@@ -51,6 +51,7 @@ export default function App() {
       <main className="mx-auto w-full max-w-7xl px-4 py-6 sm:px-6 lg:px-8">
         <Routes>
           <Route path="/" element={<Home />} />
+          <Route path="/quote" element={<MobileEstimator />} />
           <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/settings" element={<Settings mode={mode} theme={theme} onChangeMode={setMode} onChangeTheme={setTheme} />} />
           <Route path="/estimators/housing" element={<HousingEstimator />} />

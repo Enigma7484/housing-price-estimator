@@ -1,13 +1,13 @@
-import { BarChart3, Building2, Car, Home, LayoutDashboard, Moon, Settings, Smartphone, Sun } from "lucide-react";
+import { BarChart3, Building2, Car, ClipboardList, LayoutDashboard, Moon, Settings, Smartphone, Sun } from "lucide-react";
 import { NavLink } from "react-router-dom";
 import type { DisplayMode } from "../types/themeTypes";
 
 const navItems = [
-  { label: "Home", href: "/", icon: Home },
-  { label: "Housing", href: "/estimators/housing", icon: Building2 },
-  { label: "Mobile", href: "/estimators/mobile", icon: Smartphone },
-  { label: "Car", href: "/estimators/car", icon: Car },
+  { label: "Quote", href: "/quote", icon: ClipboardList },
   { label: "Dashboard", href: "/dashboard", icon: LayoutDashboard },
+  { label: "Devices", href: "/estimators/mobile", icon: Smartphone },
+  { label: "Auto", href: "/estimators/car", icon: Car },
+  { label: "Property", href: "/estimators/housing", icon: Building2 },
   { label: "Settings", href: "/settings", icon: Settings },
 ];
 
@@ -23,13 +23,13 @@ export default function Navbar({ mode, onToggleMode }: NavbarProps) {
   return (
     <header className="border-b border-line bg-white">
       <nav className="mx-auto flex w-full max-w-7xl flex-col gap-4 px-4 py-4 sm:flex-row sm:items-center sm:justify-between sm:px-6 lg:px-8">
-        <NavLink to="/" className="flex items-center gap-3">
+        <NavLink to="/quote" className="flex items-center gap-3">
           <span className="grid h-10 w-10 place-items-center rounded-md bg-ink text-white">
             <BarChart3 className="h-5 w-5" />
           </span>
           <div>
-            <p className="text-base font-semibold">AI Estimator Platform</p>
-            <p className="text-xs text-slate-500">Applied ML prediction workflows</p>
+            <p className="text-base font-semibold">ResaleIQ</p>
+            <p className="text-xs text-slate-500">Trade-in quote copilot</p>
           </div>
         </NavLink>
         <div className="flex flex-wrap items-center gap-2">

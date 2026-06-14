@@ -1,14 +1,14 @@
 services:
   - type: web
-    name: ml-estimator-platform-api
+    name: resaleiq-api
     runtime: python
     rootDir: backend
     plan: free
-    buildCommand: pip install -r requirements.txt && python training/train_housing_model.py && python training/train_mobile_model.py
+    buildCommand: pip install -r requirements.txt && python training/train_housing_model.py && python training/train_mobile_model.py && python training/train_car_model.py
     startCommand: uvicorn app.main:app --host 0.0.0.0 --port $PORT
     healthCheckPath: /api/health
     envVars:
       - key: PYTHON_VERSION
         value: 3.11.9
       - key: ESTIMATOR_FRONTEND_ORIGINS
-        value: http://localhost:5173
+        value: http://localhost:5173,https://*.vercel.app
