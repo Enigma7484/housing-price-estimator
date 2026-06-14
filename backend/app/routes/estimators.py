@@ -8,7 +8,7 @@ router = APIRouter()
 @router.get("/estimators")
 def list_estimators():
     return {
-        "platform": "AI Estimator Platform",
+        "platform": "ResaleIQ",
         "live_count": sum(1 for item in estimator_registry.catalog() if item["status"] == "ready"),
         "estimators": estimator_registry.catalog(),
     }

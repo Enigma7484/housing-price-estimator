@@ -6,7 +6,7 @@ from pathlib import Path
 
 @dataclass(frozen=True)
 class Settings:
-    app_name: str = "AI Estimator Platform API"
+    app_name: str = "ResaleIQ API"
     api_prefix: str = "/api"
     frontend_origin: str = os.getenv("ESTIMATOR_FRONTEND_ORIGIN", "http://localhost:5173")
 
