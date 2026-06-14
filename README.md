@@ -217,6 +217,10 @@ Add screenshots here after running the local demo:
 - Production Docker and cloud deployment profiles
 - CI checks for backend and frontend
 
+## MVP Strategy
+
+See [`docs/MVP_ROADMAP.md`](docs/MVP_ROADMAP.md) for the recommended commercial pivot, current market demand, buyer pain points, MVP build plan, pricing strategy, and pitch script.
+
 ## Demo Positioning
 
 This project is designed as a serious applied ML platform: modular model architecture, local trained artifacts, typed APIs, clean frontend workflows, and a direct path toward hosted demos with stronger infrastructure.
